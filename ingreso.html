@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingreso</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables de diseño (equivale a los estilos globales de Figma) ── */
+    :root {
+      --color-primary: #1A3A6B;
+      --color-bg: #F2F2F2;
+      --color-white: #FFFFFF;
+      --color-border: #D0D0D0;
+      --color-text: #1A1A1A;
+      --color-muted: #6B6B6B;
+      --color-hint: #8A8A8A;
+      --color-btn-primary: #B0B0B0;
+      --color-btn-secondary-border: #1A1A1A;
+      --radius: 10px;
+      --font: 'DM Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--color-bg);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    /* ── Contenedor móvil (375px como en Figma) ── */
+    .screen {
+      width: 375px;
+      min-height: 100vh;
+      background: var(--color-white);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header / Navbar ── */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 0.5px solid var(--color-border);
+    }
+
+    .navbar-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .navbar-help {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--color-text);
+      cursor: pointer;
+    }
+
+    .navbar-help svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ── Contenido principal ── */
+    .content {
+      flex: 1;
+      padding: 32px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background: var(--color-bg);
+    }
+
+    /* ── Títulos (en Figma: Text styles) ── */
+    .heading {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.25;
+    }
+
+    .subtext {
+      font-size: 14px;
+      color: var(--color-muted);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    /* ── Campos del formulario ── */
+    .fields {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Campo base (en Figma: componente Input) */
+    .field {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      font-size: 15px;
+      color: var(--color-hint);
+      font-family: var(--font);
+      width: 100%;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field:focus {
+      border-color: var(--color-primary);
+      color: var(--color-text);
+    }
+
+    /* Select con ícono de chevron */
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper select {
+      padding-right: 40px;
+    }
+
+    .select-wrapper .chevron {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--color-muted);
+    }
+
+    /* Campo de teléfono con prefijo de país */
+    .phone-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 14px 12px;
+      font-size: 14px;
+      font-family: var(--font);
+      color: var(--color-text);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .phone-prefix .flag {
+      font-size: 18px;
+    }
+
+    .phone-input {
+      flex: 1;
+    }
+
+    .hint-text {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-top: 4px;
+      padding-left: 2px;
+    }
+
+    /* ── Botones (en Figma: componente Button) ── */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 700;
+      font-family: var(--font);
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      border: none;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Botón primario — relleno */
+    .btn-primary {
+      background: var(--color-btn-primary);
+      color: var(--color-white);
+    }
+
+    /* Botón secundario — solo borde */
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--color-btn-secondary-border);
+      color: var(--color-text);
+    }
+
+    /* Link de texto */
+    .link {
+      text-align: center;
+      font-size: 14px;
+      color: var(--color-text);
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font);
+      padding: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+
+    <!-- Navbar: equivale al frame "Header" en Figma -->
+    <nav class="navbar">
+      <span class="navbar-title">Ingreso</span>
+      <div class="navbar-help">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <circle cx="12" cy="17" r=".5" fill="currentColor"/>
+        </svg>
+        Ayuda
+      </div>
+    </nav>
+
+    <!-- Contenido: equivale al frame "Content" en Figma -->
+    <main class="content">
+
+      <!-- Títulos: Text layers en Figma -->
+      <div>
+        <h1 class="heading">Ingresa identificación y número de teléfono.</h1>
+        <p class="subtext">Te enviaremos un código para validar tu número de teléfono</p>
+      </div>
+
+      <!-- Campos: Input components en Figma -->
+      <div class="fields">
+
+        <!-- Dropdown: Select component -->
+        <div class="select-wrapper">
+          <select class="field">
+            <option value="" disabled selected>Tipo de identificación</option>
+            <option value="cc">Cédula de ciudadanía</option>
+            <option value="ce">Cédula de extranjería</option>
+            <option value="pasaporte">Pasaporte</option>
+          </select>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </div>
+
+        <!-- Input de texto -->
+        <input class="field" type="text" placeholder="Número de identificación" />
+
+        <!-- Input de teléfono con prefijo -->
+        <div>
+          <div class="phone-wrapper">
+            <button class="phone-prefix">
+              <span class="flag">🇨🇴</span>
+              <span>+57</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <input class="field phone-input" type="tel" placeholder="Número de tu celular" />
+          </div>
+          <p class="hint-text">El número debe tener 10 dígitos</p>
+        </div>
+
+      </div>
+
+      <!-- Botones: Button components en Figma -->
+      <div class="actions">
+        <button class="btn btn-primary">Enviar código por WhatsApp</button>
+        <button class="btn btn-secondary">Enviar código por SMS</button>
+        <button class="link">¿No puedes iniciar sesión?</button>
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>
